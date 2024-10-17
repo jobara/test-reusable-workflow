@@ -1,0 +1,21 @@
+name: Called workflow
+
+on:
+  workflow_call:
+    inputs:
+      pass:
+        default: true
+        required: false
+        type: boolean
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    if: ${{ inputs.pass }}
+    steps:
+      - run: echo 'The triggering workflow passed'
+  on-fail:
+    runs-on: ubuntu-latest
+    if: ${{ !inputs.pass }}
+    steps:
+      - run: exit 1

@@ -1,0 +1,24 @@
+name: Caller workflow
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      fail:
+        description: 'Force failure'
+        default: false
+        required: false
+        type: boolean
+
+jobs:
+  calls-reusable-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call reusable workflow
+        uses: jobara/test-reusable-workflow/.github/workflows/called.yml@main
+        with:
+          pass: ${{!inputs.fail }}
+
