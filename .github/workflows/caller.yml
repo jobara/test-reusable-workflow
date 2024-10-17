@@ -15,10 +15,8 @@ on:
 
 jobs:
   calls-reusable-workflow:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Call reusable workflow
-        uses: jobara/test-reusable-workflow/.github/workflows/called.yml@main
-        with:
-          pass: ${{!inputs.fail }}
+    name: Call reusable workflow
+    uses: ./.github/workflows/called.yml
+    with:
+        pass: ${{!inputs.fail }}
 
